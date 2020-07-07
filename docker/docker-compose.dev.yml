@@ -16,6 +16,8 @@ services:
       - db.catroweb.dev
       - db.catroweb.test
       - chrome.catroweb
+      - redis.dev
+      - redis.test
     ports:
       - 8080:80
     volumes:
@@ -143,3 +145,15 @@ services:
     depends_on:
       - db.catroweb.dev
       - db.catroweb.test
+
+  redis.dev:
+    image: redis
+    container_name: redis.dev
+    ports:
+      - 6379
+
+  redis.test:
+    image: redis
+    container_name: redis.test
+    ports:
+      - 6379
