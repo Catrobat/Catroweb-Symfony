@@ -67,32 +67,14 @@ jobs:
   #  - Config defined in .stylelintrc.json
   #  - Automatic fix support
   #  - More information at: https://stylelint.io/
+  #  - "test-style" script is defined in package.json to execute stylelint
   #
   stylelint:
     name: Sass,CSS [StyleLint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      # Download and set up node (caching is enabled)
-      - uses: actions/setup-node@v2.1.1
-        with:
-          node-version: '10.x'  # optional
-
-      # Optional - improve performance by caching
-      - id: npm-cache
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # Only install modules if there is no cache hit
-      - if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm install
-
-      # Run the checks -> test-style script msut be defined in package.json
+      - uses: ./.github/actions/setup-npm-node-modules
       - run: npm run test-style
         continue-on-error: true  # TODO: remove after fixing all style errors
 

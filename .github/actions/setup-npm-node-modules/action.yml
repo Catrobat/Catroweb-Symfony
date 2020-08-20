@@ -1,0 +1,22 @@
+name: 'Install node and npm modules'
+description: 'Install node and npm modules. Caching is enabled for enhanced performance.'
+runs:
+  using: "composite"
+  steps:
+    # Download and set up node using an official GitHub action. (caching is already enabled in this action)
+    - uses: actions/setup-node@v2.1.1
+      with:
+        node-version: '10.x'  # optional
+
+    # Optional caching step to improve performance. Restores npm modules if possible.
+    - id: npm-cache
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    # Only install modules from scratch if there is no cache hit
+    - if: steps.npm-cache.outputs.cache-hit != 'true'
+      run: npm install
