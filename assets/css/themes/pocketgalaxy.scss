@@ -1,0 +1,11 @@
+@import "../base/variables";
+// Colors
+
+$primary:                               #0b3e97;
+$default-background-color:              #edf0ff;
+
+// Footer
+$footer-background-color:              $primary;
+$footer-color:                         $white;
+
+@import "../base/base";
