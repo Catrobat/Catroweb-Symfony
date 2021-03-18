@@ -252,6 +252,9 @@
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
     },
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.10.1"
+    },
     "google/apiclient": {
         "version": "2.0",
         "recipe": {
@@ -744,6 +747,9 @@
             "src/Controller/.gitignore",
             "src/Kernel.php"
         ]
+    },
+    "symfony/http-client": {
+        "version": "v4.4.20"
     },
     "symfony/http-foundation": {
         "version": "v4.4.5"
