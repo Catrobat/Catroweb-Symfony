@@ -384,24 +384,10 @@
   color: $primary;
 }
 
-.theme-logo-title {
-  font-size: $theme-logo-font-size;
-  font-weight: $theme-logo-font-weight;
-}
-
 .parting-line {
   border-top: 1px solid $primary;
 }
 
-// Login Logo
-
-.title-color-left {
-  color: $theme-logo-color-primary;
-}
-
-.title-color-right {
-  color: $theme-logo-color-secondary;
-}
 .upload-image {
   position: relative;
   top: -45px;

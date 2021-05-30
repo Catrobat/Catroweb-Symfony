@@ -10,9 +10,7 @@
 
   {% block fos_user_content %}
 
-    <div class="container-fluid" style="width:100%">
-
-      {% include 'UserManagement/login_logo.html.twig' %}
+    <div class="container-fluid full-width">
 
       <!-- Policy -->
       {% include 'PrivacyAndTerms/policy.html.twig' %}
@@ -25,7 +23,7 @@
             {{ form_start(form) }}
 
             {% for errorItem in form.plainPassword.first.vars.errors %}
-              <div id="signupalert" style="display:block" class="alert alert-danger">{{ errorItem.message }}</div>
+              <div id="signupalert" class="alert alert-danger display-block">{{ errorItem.message }}</div>
             {% endfor %}
 
             <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]"
@@ -35,7 +33,7 @@
               <label class="mdc-text-field mdc-text-field--filled password-first">
                 <span class="mdc-text-field__ripple"></span>
                 {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first' }}) }}
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
+                <span class="mdc-icon-button material-icons pw-toggler icon-color">visibility</span>
                 <span class="mdc-floating-label" id="password-first-label">{{ 'profile.newPass'|trans({}, 'catroweb') }}</span>
                 <span class="mdc-line-ripple"></span>
               </label>
@@ -45,7 +43,7 @@
               <label class="mdc-text-field mdc-text-field--filled password-second">
                 <span class="mdc-text-field__ripple"></span>
                 {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second' }}) }}
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
+                <span class="mdc-icon-button material-icons pw-toggler icon-color">visibility</span>
                 <span class="mdc-floating-label" id="password-second-label">{{ 'profile.repeatPass'|trans({}, 'catroweb') }}</span>
                 <span class="mdc-line-ripple"></span>
               </label>
@@ -54,9 +52,9 @@
             <input type="hidden" name="_target_path" value="{{ path('index') }}"/>
 
             <!-- Button -->
-            <div style="margin-top:30px; margin-bottom:30px" class="form-group">
+            <div class="form-group buttons-login-process">
               <div class="col-sm-12 controls">
-                <button id="_submit" type="submit" style="width: 100%;" data-toggle="modal" data-target="#termsModal"
+                <button id="_submit" type="submit" data-toggle="modal" data-target="#termsModal"
                         class="login btn btn-primary"
                         name="_create">{{ "login.changePass"|trans({}, "catroweb") }}</button>
               </div>

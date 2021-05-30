@@ -2,8 +2,60 @@
 @import "theme_settings";
 @import "@material/textfield/mdc-text-field";
 
-.login {
-  width: 318px;
+
+.group {
+  position: relative;
+  margin-top: 40px;
+}
+
+.group input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: $primary;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba($primary, 0.3);
+}
+
+.group input:focus {
+  outline: none;
+}
+
+.group input:invalid {
+  border-color: #fdd;
+  border-width: 3px;
+}
+
+.group input:valid {
+  border-color: #dfd;
+  border-width: 3px;
+}
+
+/* LABEL ======================================= */
+
+.group label {
+  position: absolute;
+  top: 20px;
+  left: 5px;
+  font-size: 18px;
+  font-weight: $font-weight-normal;
+  color: rgba($primary, 0.5);
+  pointer-events: none;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+/* active durum */
+
+.group input:focus ~ label,
+.label-with-placeholder,
+input:valid ~ label {
+  top: -20px !important;
+  font-size: 14px !important;
+  color: rgba($primary, 0.7) !important;
 }
 
 /* BOTTOM BARS ================================= */
@@ -34,6 +86,201 @@
 .bar::after {
   right: 50%;
 }
+
+/* active durum bar */
+
+.group input:focus ~ .bar::before,
+.group input:focus ~ .bar::after {
+  width: 50%;
+}
+
+/* HIGHLIGHTER ================================== */
+
+.highlight {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100px;
+  height: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* active durum */
+
+.group input:focus ~ .highlight {
+  -webkit-animation: inputhighlighter 0.3s ease;
+  -moz-animation: inputhighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+.span-input {
+  position: relative;
+  top: -5px;
+  margin-left: 10px;
+}
+
+#_submit {
+  width: 100%;
+}
+
+.form-group {
+  min-height: 39px;
+}
+
+#seperator-text {
+  position: relative;
+  top: 10px;
+  text-align: left;
+}
+
+/* PASSWORD VISIBILITY ICON ================================== */
+
+.show-hide-password {
+  display: flex;
+}
+
+.icon-color{
+  color: $primary;
+}
+
+/* ALTERNATIVE LOGIN GOOGLE BUTTON ================================== */
+
+#btn-login-google{
+  color: rgba(0, 0, 0, 0.54);
+  //button texts are centered, after manually aligning them left-justified. For dynamic resizing with window size.
+  text-align: center;
+  background-color: #fff;
+  border-color: rgba(0, 0, 0, 0.54);
+  //disable any hover effects
+  &:hover{
+    //intentionally empty
+  }
+}
+
+.btn-login-google-content{
+  //align all alt login buttons texts to one vertical line
+  padding-right: 12px;
+}
+
+.google-logo{
+  position: relative;
+  top: -2px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.google-text {
+  font-family: Roboto, sans-serif;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* ALTERNATIVE LOGIN FACEBOOK BUTTON ================================== */
+
+#btn-login-facebook{
+  //button texts are centered, after manually aligning them left-justified. For dynamic resizing with window size.
+  text-align: center;
+  background-color: #1877f2;
+  border-color: #1877f2;
+  //disable any hover effects
+  &:hover{
+    //intentionally empty
+  }
+}
+
+.btn-login-facebook-content{
+  //align all alt login buttons texts to one vertical line
+  padding-right: 0;
+}
+
+.fb-logo{
+  position: relative;
+  top: -2px;
+  height: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.facebook-text {
+  color: #fff;
+}
+
+/* ALTERNATIVE LOGIN APPLE BUTTON ================================== */
+
+#btn-login-apple{
+  //button texts are centered, after manually aligning them left-justified. For dynamic resizing with window size.
+  text-align: center;
+  background-color: #000;
+  border-color: #000;
+  //disable any hover effects
+  &:hover{
+    //intentionally empty
+  }
+}
+
+.btn-login-apple-content{
+  //align all alt login buttons texts to one vertical line
+  padding-right: 22px;
+}
+
+.apple-logo{
+  position: relative;
+  top: -4px;
+  height: 24px;
+  margin-right: 13px;
+  vertical-align: middle;
+  -ms-transform: scale(1.3, 1.3);
+  -webkit-transform: scale(1.3, 1.3);
+  transform: scale(1.3, 1.3);
+}
+
+.apple-text {
+  color: #fff;
+}
+
+/* REDIRECTS ================================== */
+
+.redirect-first-line{
+  padding-top: 20px;
+  padding-bottom: 12px;
+  font-size: 85%;
+}
+
+.redirect-second-line{
+  padding-top: 6px;
+  padding-bottom: 82px;
+  font-size: 85%;
+}
+
+hr {
+  width: 100%;
+  border-color: $primary;
+}
+
+/* LOGIN GENERAL ================================== */
+
+.no-padding{
+  padding: 0;
+}
+
+.buttons-login-process{
+  margin-top: 17px;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.display-block{
+  display: block;
+}
+
+.email-alert-margin{
+  margin-top: 15px;
+}
+
+/* CURRENTLY NOT IN USE ================================== */
 
 /* form animasyon ================ */
 
@@ -66,12 +313,6 @@
     background: transparent;
   }
 } */
-
-.span-input {
-  position: relative;
-  top: -5px;
-  margin-left: 10px;
-}
 
 /* .social-button-effects {
   opacity: 0.9;
@@ -110,17 +351,6 @@
   margin-top: 12px;
 } */
 
-#seperator-text {
-  position: relative;
-  top: 10px;
-  text-align: left;
-}
-
-hr {
-  width: 100%;
-  border-color: $primary;
-}
-
 /* .hidden {
   width: 0;
   height: 0;
@@ -138,23 +368,3 @@ hr {
 .align_start {
   text-align: start;
 } */
-
-.show-hide-password {
-  display: flex;
-}
-
-.log-in-text {
-  font-size: 18px;
-  vertical-align: middle;
-}
-.google-logo,
-.fb-logo{
-  -ms-transform: scale(0.6, 0.6);
-  -webkit-transform: scale(0.6, 0.6);
-  transform: scale(0.6, 0.6);
-}
-.apple-logo{
-  -ms-transform: scale(1.2, 1.2);
-  -webkit-transform: scale(1.2, 1.2);
-  transform: scale(1.2, 1.2);
-}

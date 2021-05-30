@@ -10,9 +10,7 @@
 
   {% block fos_user_content %}
 
-    <div class="container-fluid" style="width:100%">
-
-      {% include 'UserManagement/login_logo.html.twig' %}
+    <div class="container-fluid full-width">
 
       <!-- Policy -->
       {% include 'PrivacyAndTerms/policy.html.twig' %}
@@ -21,11 +19,11 @@
         <div class="col-sm-11 col-md-8 col-lg-6 center">
 
           {% if already_reset is defined %}
-          <div class="alert alert-danger" style="margin-top: 15px">
+          <div class="alert alert-danger email-alert-margin">
             {{ "login.alreadyReset"|trans({}, "catroweb") }}
-          </div>
+          <{/div>
           {% else %}
-          <div class="alert alert-success" style="margin-top: 15px">
+          <div class="alert alert-success email-alert-margin">
             {{ "login.recoverPassSend"|trans({}, "catroweb") }}
           </div>
           {% endif %}
@@ -34,7 +32,7 @@
           <div>
             <div class="form-group">
               <div class="col-md-12 control">
-                <div style="padding-top:15px; font-size:85%">
+                <div class="redirect-first-line">
                   {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
                   <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
                     {{ 'login.login'|trans({}, 'catroweb') }}
@@ -45,7 +43,7 @@
 
             <div class="form-group">
               <div class="col-md-12 control">
-                <div style="font-size:85%">
+                <div class="redirect-second-line">
                   {{ 'login.noAccount'|trans({}, 'catroweb') }}
                   <a id="create_account"
                      href="{{ path('fos_user_registration_register') }}">
@@ -53,8 +51,6 @@
                 </div>
               </div>
             </div>
-
-            {% include 'UserManagement/or_line.html.twig' %}
           </div>
 
         </div>
@@ -62,20 +58,10 @@
 
     </div>
 
-    {% include 'UserManagement/oauth_registration.html.twig' %}
-
-
   {% endblock fos_user_content %}
 
 {% endblock body %}
 
 {% block js %}
   <script src="{{ asset('js/register.min.js') }}"></script>
-  <script>
-    const register =new Register(
-            "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
-            "{{ path('hwi_oauth_service_redirect', {'service': 'facebook' })  }}",
-            "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
-    )
-  </script>
 {% endblock js %}

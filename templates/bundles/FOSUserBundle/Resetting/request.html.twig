@@ -10,97 +10,89 @@
 
 {% block body %}
 
-  {% block fos_user_content %}
+    {% block fos_user_content %}
 
-    <div class="container-fluid" style="width:100%">
+      <div class="container-fluid">
 
-      {% include 'UserManagement/login_logo.html.twig' %}
+        <!-- Policy -->
+          {% include 'PrivacyAndTerms/policy.html.twig' %}
 
-      <!-- Policy -->
-      {% include 'PrivacyAndTerms/policy.html.twig' %}
-
-      <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-6 text-center center">
-          {% if invalid_username is defined %}
-            <div id="request-alert"
-                 class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb") }}
-            </div>
-          {% endif %}
+        <div class="row justify-content-center">
+          <div class="col-sm-11 col-md-8 col-lg-6 text-center center">
+              {% if invalid_username is defined %}
+                <div id="request-alert"
+                     class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb") }}
+                </div>
+              {% endif %}
+          </div>
         </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-6 center">
+        <div class="row justify-content-center">
+          <div class="col-sm-11 col-md-8 col-lg-6 center">
 
-          <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
-                action="{{ path('fos_user_resetting_send_email') }}" method="post">
+            <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
+                  action="{{ path('fos_user_resetting_send_email') }}" method="post">
 
-            <div class="row">
-              <div class="col">
+              <div class="row no-padding">
+                <div class="col no-padding">
 
-                <label class="mdc-text-field mdc-text-field--filled username">
-                  <span class="mdc-text-field__ripple"></span>
-                  <input type="text" class="mdc-text-field__input" aria-labelledby="username-label" id="username" name="username" required>
-                  <span class="mdc-floating-label" id="username-label">{{ "login.userOrEmail"|trans({}, "catroweb") }}</span>
-                  <span class="mdc-line-ripple"></span>
-                </label>
-
-                <!-- Button -->
-                <div style="margin-top:30px; margin-bottom:30px" class="form-group">
-                  <div class="col-sm-12 controls">
-                    <button id="recover" style="width: 100%;" class="login btn btn-primary"
-                            name="recover">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
+                  <div class="group">
+                    <input type="text" id="username" name="username" required autofocus/>
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label><span
+                              class="span-input">{{ "login.userOrEmail"|trans({}, "catroweb") }}</span></label>
                   </div>
-                </div>
 
-                <!-- Redirects -->
-                <div>
-                  <div class="form-group">
-                    <div class="col-md-12 control">
-                      <div style="padding-top:15px; font-size:85%">
-                        {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
-                        <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
-                          {{ 'login.login'|trans({}, 'catroweb') }}
-                        </a>
+                  <!-- Button -->
+                  <div class="row">
+                    <div class="col no-padding">
+                      <div class="form-group buttons-login-process">
+                        <div class="col-sm-12 controls">
+                          <button id="recover" class="login btn btn-primary full-width"
+                                  name="recover">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <div class="col-md-12 control">
-                      <div style="font-size:85%">
-                        {{ 'login.noAccount'|trans({}, 'catroweb') }}
-                        <a id="create_account"
-                           href="{{ path('fos_user_registration_register') }}">
-                          {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                  <!-- Redirects -->
+                  <div>
+                    <div class="form-group">
+                      <div class="col-md-12 control">
+                        <div class="redirect-first-line">
+                            {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
+                          <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
+                              {{ 'login.login'|trans({}, 'catroweb') }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-12 control">
+                        <div class="redirect-second-line">
+                            {{ 'login.noAccount'|trans({}, 'catroweb') }}
+                          <a id="create_account"
+                             href="{{ path('fos_user_registration_register') }}">
+                              {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {% include 'UserManagement/or_line.html.twig' %}
                 </div>
-
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
 
-    {% include 'UserManagement/oauth_registration.html.twig' %}
 
-  {% endblock fos_user_content %}
+    {% endblock fos_user_content %}
 
 {% endblock body %}
 
 {% block js %}
   <script src="{{ asset('js/register.min.js') }}"></script>
-  {{ encore_entry_script_tags('request') }}
-  <script>
-    const register =new Register(
-      "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
-      "{{ path('hwi_oauth_service_redirect', {'service': 'facebook' })  }}",
-      "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
-    )
-  </script>
 {% endblock js %}
