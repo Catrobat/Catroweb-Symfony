@@ -82,7 +82,8 @@
     "popper.js": "^1.16.1",
     "sweetalert2": "^11.0.16",
     "textfilljs": "^1.0.3-a",
-    "vis": "^4.21.0"
+    "vis": "^4.21.0",
+    "jwt-decode": "^3.1.2"
   },
   "standard": {
     "globals": [

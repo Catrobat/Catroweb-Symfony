@@ -159,6 +159,10 @@ const COPY_CONFIG =
     lazysizes: {
       src: 'node_modules/lazysizes/lazysizes.min.js',
       dest: PUBLIC_DIRECTORY + '/js/modules/lazysizes.min.js'
+    },
+    jwt_decode: {
+      src: 'node_modules/jwt-decode/build/jwt-decode.js',
+      dest: PUBLIC_DIRECTORY + '/js/modules/jwt-decode.js'
     }
   }
 
