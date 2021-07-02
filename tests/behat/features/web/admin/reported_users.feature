@@ -5,7 +5,7 @@ Feature: Admin reported users
   Background:
     Given there are admins:
       | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
     And there are users:
       | name     | password | token      | email               | id |
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
@@ -33,28 +33,28 @@ Feature: Admin reported users
      | inappropriate | 2          | 1       | 01.01.2020 12:01 | c2   |
 
   Scenario: List reported users sorted by reported comments
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getReportedCommentsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the reported table:
       | #Reported Comments | #Reported Programs | Username | Email               |
       | 5                  | 0                  | Superman | dev1@pocketcode.org |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "Angel"
 
   Scenario: List reported users sorted by reported programs
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getProgramInappropriateReportsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the reported table:
       | #Reported Comments | #Reported Programs | Username | Email               |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "Superman"
     
     Scenario: Show reported Programs by user
-      Given I log in as "Adminius" with the password "123456"
+      Given I log in as "Admin" with the password "123456"
       And I am on "/admin/reported_users/list"
       And I wait for the page to be loaded
       Then I should see the reported table:
@@ -66,7 +66,7 @@ Feature: Admin reported users
       Then I should be on "/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D=1"
 
   Scenario: Show reported Programs by user
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/reported_users/list"
     And I wait for the page to be loaded
     Then I should see the reported table:

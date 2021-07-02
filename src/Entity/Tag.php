@@ -37,7 +37,7 @@ class Tag
   protected Collection $programs;
 
   /**
-   * @ORM\Column(name="internal_title", type="string", nullable=false, unique=true)
+   * @ORM\Column(name="internal_title", type="string", nullable=false)
    */
   protected string $internal_title = '';
 
@@ -103,6 +103,11 @@ class Tag
       return;
     }
     $this->programs->add($program);
+  }
+
+  public function getProjectCount(): int
+  {
+    return count($this->programs);
   }
 
   public function removeProgram(Program $program): void

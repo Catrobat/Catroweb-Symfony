@@ -5,7 +5,7 @@ Feature: Admin featured programs
   Background:
     Given there are admins:
       | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
 
     And there are users:
       | name      | password | token      | email               | id |
@@ -36,7 +36,7 @@ Feature: Admin featured programs
       | 4  | b100d-c01d  |  false   | embroidery | 3        |   no     |
 
   Scenario: List all featured programs:
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
@@ -45,56 +45,56 @@ Feature: Admin featured programs
       | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
       | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
       | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
-    And I should not see "Adminius"
+    And I should not see "Admin"
 
   Scenario: List featured programs just for arduino
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=3&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Program                  | Url | Flavor   | Priority   |
       | 2  | program 2 (#c0ffee-b00b) |     | arduino  | 1          |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "program 1"
     And I should not see "program 3"
 
   Scenario: List featured programs just for IOS
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=1&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Program                  | Url | Flavor     | Priority   |
       | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1          |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "program 2"
     And I should not see "program 3"
 
   Scenario: List featured programs with priority above 1
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=2&filter%5Bpriority%5D%5Bvalue%5D=1&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Program                  | Url | Flavor     | Priority |
       | 3  | program 3 (#c01d-cafe)   |     | luna       | 2        |
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "program 1"
     And I should not see "program 2"
 
   Scenario: List only active featured programs
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=1&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Program                  | Url | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1        |
       | 3  | program 3 (#c01d-cafe)   |     | luna       | 2        |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "program 2"
     And I should not see "program 4"
 
   Scenario: Delete first Featured Program
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
@@ -112,14 +112,14 @@ Feature: Admin featured programs
       | 2  | program 2 (#c0ffee-b00b) |     | arduino     | 1          |
       | 3  | program 3 (#c01d-cafe)   |     | luna        | 2          |
       | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
-    And I should not see "Adminius"
+    And I should not see "Admin"
     And I should not see "program 1"
     Then I am on "/app"
     And I wait for the page to be loaded
     Then I should not see "featured program"
 
     Scenario: Click on program link
-      Given I log in as "Adminius" with the password "123456"
+      Given I log in as "Admin" with the password "123456"
       And I am on "/admin/featured_program/list"
       And I wait for the page to be loaded
       Then I should see the featured table:
@@ -133,7 +133,7 @@ Feature: Admin featured programs
       Then I should see "Edit \"program 1 (#1337-c0ffee)\""
 
     Scenario: Adding a featured Program (success)
-      Given I log in as "Adminius" with the password "123456"
+      Given I log in as "Admin" with the password "123456"
       And I am on "/admin/featured_program/list"
       And I wait for the page to be loaded
       Then I should see the featured table:
@@ -160,7 +160,7 @@ Feature: Admin featured programs
         | 5  | to add (#dead-beef)      |     | pocketcode  | 3          |
 
   Scenario: Adding a featured Program (fail)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
@@ -185,7 +185,7 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery  | 3          |
 
   Scenario: Adding a featured Program (wrong picture)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
@@ -204,7 +204,7 @@ Feature: Admin featured programs
     Then I should see "Error"
 
   Scenario: Adding a featured Program with URL - Project (success)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
@@ -232,7 +232,7 @@ Feature: Admin featured programs
       | 5  | to add (#dead-beef)      |     | pocketcode  | 3          |
 
   Scenario: Adding a featured Program with URL - Extern (success)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
@@ -260,7 +260,7 @@ Feature: Admin featured programs
       | 5  |                          | http://www.google.com | pocketcode  | 3          |
 
   Scenario: Adding a featured Program with URL - Project (fail)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/featured_program/list"
     And I wait for the page to be loaded
     Then I should see the featured table:

@@ -10,12 +10,12 @@ Feature: Admin click statistics feature
       | 2  | Catrobat  |
       | 3  | OtherUser |
     And there are extensions:
-      | id | name         | prefix  |
-      | 1  | Arduino      | ARDUINO |
-      | 2  | Drone        | DRONE   |
-      | 3  | Lego         | LEGO    |
-      | 4  | Phiro        | PHIRO   |
-      | 5  | Raspberry Pi | RASPI   |
+      | id | internal_title |
+      | 1  | arduino        |
+      | 2  | drone          |
+      | 3  | lego           |
+      | 4  | phiro          |
+      | 5  | raspberry_pi   |
 
     And there are tags:
       | internal_title | title_ltm_code |
@@ -28,10 +28,10 @@ Feature: Admin click statistics feature
 
     And there are projects:
       | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version | extensions | tags                       | remix_root |
-      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:01 | 0.8.5   | Lego,Phiro | Game,Animation,Story,Music | true       |
-      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | Game,Animation,Story       | false      |
+      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:01 | 0.8.5   | lego,phiro | Game,Animation,Story,Music | true       |
+      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | lego,drone | Game,Animation,Story       | false      |
       | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | Game,Animation             | true       |
-      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | Art                        | true       |
+      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | lego       | Art                        | true       |
       | 5  | Nothing | p6          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | Experimental               | true       |
 
 
@@ -47,8 +47,8 @@ Feature: Admin click statistics feature
       | rec_specific_programs | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/2 | en_us  | 5              | 2           |        |                | August 15, 2020 20:27 |
       | project               | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/1 | en_us  | 3              | 1           |        |                | August 15, 2020 20:28 |
       | rec_homepage          | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/2 | en_us  |                |             |        |                | August 15, 2020 20:29 |
-      | extensions            | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/4 | en_us  |                |             |        | Lego           | August 15, 2020 20:30 |
-      | extensions            | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/2 | en_us  |                |             |        | Arduino        | August 15, 2020 20:31 |
+      | extensions            | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/4 | en_us  |                |             |        | lego           | August 15, 2020 20:30 |
+      | extensions            | Mozilla/5.0 (X11; Linux x86_64) | Catrobat  | http://localhost/index_test.php/app/project/2 | en_us  |                |             |        | arduino        | August 15, 2020 20:31 |
 
 
   Scenario: As admin I should be able to see list of all click statistics
@@ -57,8 +57,8 @@ Feature: Admin click statistics feature
     And I wait for the page to be loaded
     Then I should see the table with all click statistics in the following order:
       | Id | Type                  | User      | Program      | Scratch Program Id | Recommended From Program | Tag          | Extension | Clicked At            | Locale | User Agent                      | Referrer                                      |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
@@ -89,8 +89,8 @@ Feature: Admin click statistics feature
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
 
   Scenario: List all click statistics sorted by clicked at descending
     Given I log in as "Admin" with the password "123456"
@@ -110,8 +110,8 @@ Feature: Admin click statistics feature
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
 
   Scenario: List all click statistics sorted by locale
     Given I log in as "Admin" with the password "123456"
@@ -131,8 +131,8 @@ Feature: Admin click statistics feature
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
 
 
   Scenario: List all click statistics sorted by type
@@ -144,8 +144,8 @@ Feature: Admin click statistics feature
     Then I should see the table with all click statistics in the following order:
 
       | Id | Type                  | User      | Program      | Scratch Program Id | Recommended From Program | Tag          | Extension | Clicked At            | Locale | User Agent                      | Referrer                                      |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 1  | project               | Catrobat  | Minions (#1) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:20 | de     | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 2  | project               | Catrobat  | Galaxy (#2)  |                    | Alone (#3)               |              |           | August 15, 2020 20:21 | de     | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/3 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
@@ -173,8 +173,8 @@ Feature: Admin click statistics feature
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 3  | tags                  | Catrobat  |              |                    |                          | Animation    |           | August 15, 2020 20:22 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 5  | tags                  | OtherUser |              |                    |                          | Experimental |           | August 15, 2020 20:24 | en_us  | Chrome/5.0 (X11; Linux x86_64)  | http://localhost/index_test.php/app/project/5 |
       | 4  | tags                  | OtherUser |              |                    |                          | Game         |           | August 15, 2020 20:23 | en_us  | Chrome/5.0 (X11; Linux x86_64)  | http://localhost/index_test.php/app/project/3 |
@@ -193,11 +193,11 @@ Feature: Admin click statistics feature
       | 1  | project               | Catrobat  | Minions (#1) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:20 | de     | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 2  | project               | Catrobat  | Galaxy (#2)  |                    | Alone (#3)               |              |           | August 15, 2020 20:21 | de     | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/3 |
       | 4  | tags                  | OtherUser |              |                    |                          | Game         |           | August 15, 2020 20:23 | en_us  | Chrome/5.0 (X11; Linux x86_64)  | http://localhost/index_test.php/app/project/3 |
       | 6  | rec_specific_programs | OtherUser | Nothing (#5) |                    | Trolol (#4)              |              |           | August 15, 2020 20:25 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
       | 5  | tags                  | OtherUser |              |                    |                          | Experimental |           | August 15, 2020 20:24 | en_us  | Chrome/5.0 (X11; Linux x86_64)  | http://localhost/index_test.php/app/project/5 |
 
 
@@ -219,8 +219,8 @@ Feature: Admin click statistics feature
       | 8  | rec_specific_programs | Catrobat  | Nothing (#5) |                    | Galaxy (#2)              |              |           | August 15, 2020 20:27 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
       | 9  | project               | Catrobat  | Alone (#3)   |                    | Minions (#1)             |              |           | August 15, 2020 20:28 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/1 |
       | 10 | rec_homepage          | Catrobat  |              |                    |                          |              |           | August 15, 2020 20:29 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
-      | 11 | extensions            | Catrobat  |              |                    |                          |              | Lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
-      | 12 | extensions            | Catrobat  |              |                    |                          |              | Arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
+      | 11 | extensions            | Catrobat  |              |                    |                          |              | lego      | August 15, 2020 20:30 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/4 |
+      | 12 | extensions            | Catrobat  |              |                    |                          |              | arduino   | August 15, 2020 20:31 | en_us  | Mozilla/5.0 (X11; Linux x86_64) | http://localhost/index_test.php/app/project/2 |
 
 
   Scenario: Filter click statistics by id using filter options

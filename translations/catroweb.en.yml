@@ -548,19 +548,6 @@ ci:
   pending: Generating apk
   download: Download apk
 
-gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
-  submitown:
-    header: be aware
-    subheader: You can only submit your own projects
-    text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
-
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -780,3 +767,20 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+
+extensions:
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms

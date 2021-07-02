@@ -6,16 +6,16 @@ Feature: List programs with and without debug build type
       | name           | password | token      | id |
       | GeneratedUser1 | vwxyz    | aaaaaaaaaa | 1  |
     And there are extensions:
-      | id | name  | prefix |
-      | 1  | Drone | DRONE  |
-      | 2  | Lego  | LEGO   |
-      | 3  | Phiro | PHIRO  |
+      | id | internal_title |
+      | 1  | drone          |
+      | 2  | lego           |
+      | 3  | phiro          |
     And there are programs:
       | id | name          | description | downloads | views | upload time      | version | debug | extensions | owned by       |
-      | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | Lego,Drone | GeneratedUser1 |
+      | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | lego,drone | GeneratedUser1 |
       | 2  | program 2     |             | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false |            | GeneratedUser1 |
-      | 3  | debug program | new one     | 450       | 80    | 01.04.2019 09:00 | 1.0.12  | true  | Lego,Phiro | GeneratedUser1 |
-      | 4  | program 4     |             | 133       | 33    | 01.01.2012 13:00 | 0.9.10  | false | Lego       | GeneratedUser1 |
+      | 3  | debug program | new one     | 450       | 80    | 01.04.2019 09:00 | 1.0.12  | true  | lego,phiro | GeneratedUser1 |
+      | 4  | program 4     |             | 133       | 33    | 01.01.2012 13:00 | 0.9.10  | false | lego       | GeneratedUser1 |
     And the current time is "01.08.2019 00:00"
     And I store the following json object as "debug_program":
       """
@@ -231,5 +231,5 @@ Feature: List programs with and without debug build type
 
     Examples:
       | end point         | build type | q    | programs                          | total |
-      | extensionProjects | debug      | Lego | debug program,program 1,program 4 | 3     |
-      | extensionProjects | release    | Lego | program 1,program 4               | 2     |
+      | extensionProjects | debug      | lego | debug program,program 1,program 4 | 3     |
+      | extensionProjects | release    | lego | program 1,program 4               | 2     |

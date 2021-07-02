@@ -7,12 +7,12 @@ Feature: Searching for programs
       | 1  | Catrobat |
       | 2  | User1    |
     And there are extensions:
-      | id | name         | prefix  |
-      | 1  | Arduino      | ARDUINO |
-      | 2  | Drone        | DRONE   |
-      | 3  | Lego         | LEGO    |
-      | 4  | Phiro        | PHIRO   |
-      | 5  | Raspberry Pi | RASPI   |
+      | id | internal_title |
+      | 1  | arduino        |
+      | 2  | drone          |
+      | 3  | lego           |
+      | 4  | phiro          |
+      | 5  | raspberry_pi   |
     And there are tags:
       | internal_title | title_ltm_code |
       | game           | __Spiel        |

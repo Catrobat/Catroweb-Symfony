@@ -5,7 +5,7 @@
       Background:
         Given there are admins:
           | name     | password | token      | email                | id |
-          | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+          | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
 
         And there are users:
           | name      | password | token      | email               | id |
@@ -34,7 +34,7 @@
           | program 4 | 1      | 3        | arduino    |   no     |
 
       Scenario: List all example programs:
-        Given I log in as "Adminius" with the password "123456"
+        Given I log in as "Admin" with the password "123456"
         And I am on "/admin/example_program/list"
         And I wait for the page to be loaded
         Then I should see the example table:
@@ -43,10 +43,10 @@
           | 2  | program 2 (#c0ffee-b00b) | embroidery | 1          |
           | 3  | program 3 (#c01d-cafe)   | embroidery | 2          |
           | 4  | program 4 (#b100d-c01d)  | arduino    | 3          |
-        And I should not see "Adminius"
+        And I should not see "Admin"
 
       Scenario: Delete first example Program
-        Given I log in as "Adminius" with the password "123456"
+        Given I log in as "Admin" with the password "123456"
         And I am on "/admin/example_program/list"
         And I wait for the page to be loaded
         Then I should see the example table:
@@ -64,11 +64,11 @@
           | 2  | program 2 (#c0ffee-b00b) | embroidery | 1          |
           | 3  | program 3 (#c01d-cafe)   | embroidery | 2          |
           | 4  | program 4 (#b100d-c01d)  | arduino    | 3          |
-        And I should not see "Adminius"
+        And I should not see "Admin"
         And I should not see "program 1"
 
       Scenario: Click on program link
-        Given I log in as "Adminius" with the password "123456"
+        Given I log in as "Admin" with the password "123456"
         And I am on "/admin/example_program/list"
         And I wait for the page to be loaded
         Then I should see the example table:
@@ -82,7 +82,7 @@
         Then I should see "Edit \"program 1 (#1337-c0ffee)\""
 
       Scenario: Adding an example Program (success)
-        Given I log in as "Adminius" with the password "123456"
+        Given I log in as "Admin" with the password "123456"
         And I am on "/admin/example_program/list"
         And I wait for the page to be loaded
         Then I should see the example table:
@@ -110,7 +110,7 @@
           | 5  | to add (#dead-beef)      | arduino    | 3          |
 
       Scenario: Adding a example Program (fail)
-        Given I log in as "Adminius" with the password "123456"
+        Given I log in as "Admin" with the password "123456"
         And I am on "/admin/example_program/list"
         And I wait for the page to be loaded
         Then I should see the example table:

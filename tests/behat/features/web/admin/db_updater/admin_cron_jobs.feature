@@ -4,11 +4,11 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
   Background:
     Given there are admins:
       | name     |
-      | Adminius |
+      | Admin |
 
   Scenario: All cron jobs should be shown with some stats
     Given I run the cron job command
-    And I log in as "Adminius"
+    And I log in as "Admin"
     When I am on "/admin/cronjobs/list"
     And I wait for the page to be loaded
     Then I should see "Cron Jobs"
@@ -22,7 +22,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
       | Add verified_developer UserAchievements | idle  | 1 year        |          |        | 0           |
 
   Scenario: Cron jobs can be manually triggered
-    Given I log in as "Adminius"
+    Given I log in as "Admin"
     When I am on "/admin/cronjobs/list"
     And I wait for the page to be loaded
     Then I should see "Manually trigger the cron job"
@@ -36,7 +36,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     And there should be "6" cron jobs in the database
 
   Scenario: Cron jobs can be resetted
-    Given I log in as "Adminius"
+    Given I log in as "Admin"
     And I run the cron job command
     And I am on "/admin/cronjobs/list"
     And I wait for the page to be loaded

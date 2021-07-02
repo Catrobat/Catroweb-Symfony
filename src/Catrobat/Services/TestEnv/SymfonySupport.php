@@ -343,8 +343,9 @@ trait SymfonySupport
   public function insertExtension(array $config = [], bool $andFlush = true): Extension
   {
     $extension = new Extension();
-    $extension->setName($config['name']);
-    $extension->setPrefix($config['prefix']);
+    $extension->setInternalTitle($config['internal_title']);
+    $extension->setTitleLtmCode($config['title_ltm_code'] ?? 'extension_ltm');
+    $extension->setEnabled($config['enabled'] ?? true);
 
     $this->getManager()->persist($extension);
     if ($andFlush) {
@@ -538,10 +539,11 @@ trait SymfonySupport
     $click_statistics->setClickedAt($date);
     $click_statistics->setLocale($config['locale']);
     if ('tags' === $config['type']) {
+      /** @var Tag| null $tag */
       $tag = $this->getTagRepository()->find($config['tag_id']);
       $click_statistics->setTag($tag);
     } elseif ('extensions' === $config['type']) {
-      $extension = $this->getExtensionRepository()->getExtensionByName($config['extension_name']);
+      $extension = $this->getExtensionRepository()->getExtensionByInternalTitle($config['extension_name']);
       $click_statistics->setExtension($extension[0]);
     } else {     /** @var Program $recommended_from */
       $recommended_from = $this->getProgramManager()->find($config['rec_from_id']);

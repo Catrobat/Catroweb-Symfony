@@ -8,12 +8,12 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 2  | OtherUser |
 
     And there are extensions:
-      | id | name         | prefix  |
-      | 1  | Arduino      | ARDUINO |
-      | 2  | Drone        | DRONE   |
-      | 3  | Lego         | LEGO    |
-      | 4  | Phiro        | PHIRO   |
-      | 5  | Raspberry Pi | RASPI   |
+      | id | internal_title | title_ltm_code |
+      | 1  | arduino        | __arduino      |
+      | 2  | drone          | __drone        |
+      | 3  | lego           | __lego         |
+      | 4  | phiro          | __phiro        |
+      | 5  | raspberry_pi   | __raspberry    |
 
     And there are tags:
       | id | internal_title | title_ltm_code |
@@ -26,10 +26,10 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
 
     And there are projects:
       | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version | extensions | tags                       | remix_root |
-      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | Game,Animation,Story,Music | true       |
-      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | Game,Animation,Story       | false      |
+      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | lego,phiro | Game,Animation,Story,Music | true       |
+      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | lego,drone | Game,Animation,Story       | false      |
       | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | Game,Animation             | true       |
-      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | Art                        | true       |
+      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | lego       | Art                        | true       |
       | 5  | Nothing | p6          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | Experimental               | true       |
 
     And there are forward remix relations:
@@ -58,7 +58,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   Scenario: Create one statistic entry from extensions
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I press on the extension "Lego"
+    When I press on the extension "__lego"
     And I wait for AJAX to finish
     Then There should be one database entry with type is "extensions" and "extension_id" is "3"
     And I should see "Your search returned 3 results"

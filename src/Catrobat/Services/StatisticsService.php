@@ -221,7 +221,7 @@ class StatisticsService
       $this->entity_manager->persist($click_statistics);
       $this->entity_manager->flush();
     } elseif ('extensions' == $type) {
-      $extension = $this->extension_repository->getExtensionByName($extension_name);
+      $extension = $this->extension_repository->getExtensionByInternalTitle($extension_name);
       if (null == $extension) {
         return false;
       }

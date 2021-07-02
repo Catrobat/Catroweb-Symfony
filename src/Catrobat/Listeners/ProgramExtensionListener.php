@@ -7,59 +7,93 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Entity\Extension;
 use App\Entity\Program;
 use App\Repository\ExtensionRepository;
+use Exception;
+use Psr\Log\LoggerInterface;
 
 class ProgramExtensionListener
 {
-  private ExtensionRepository $extension_repository;
+  protected ExtensionRepository $extension_repository;
+  protected LoggerInterface $logger;
 
-  public function __construct(ExtensionRepository $repo)
+  public function __construct(ExtensionRepository $repo, LoggerInterface $logger)
   {
     $this->extension_repository = $repo;
+    $this->logger = $logger;
   }
 
   public function onEvent(ProgramBeforePersistEvent $event): void
   {
-    $this->checkExtension($event->getExtractedFile(), $event->getProgramEntity());
+    $this->addExtensions($event->getExtractedFile(), $event->getProgramEntity());
   }
 
-  public function checkExtension(ExtractedCatrobatFile $extracted_file, Program $program): void
+  public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $program): void
   {
-    $xml = $extracted_file->getProgramXmlProperties();
-
-    $xpath = '//@category';
-    $nodes = $xml->xpath($xpath);
-
     $program->removeAllExtensions();
 
-    if (empty($nodes)) {
-      return;
-    }
+    $code_xml = strval($extracted_file->getProgramXmlProperties()->asXML());
 
-    $prefixes = array_map(fn ($element) => explode('_', (string) $element['category'], 2)[0], $nodes);
-    $prefixes = array_unique($prefixes);
+    // What about arduino, drone, lego, raspberry, chromecast ?
+    $this->addPhiroExtensions($program, $code_xml);
+    $this->addEmbroideryExtensions($program, $code_xml);
+    $this->addMindstormsExtensions($program, $code_xml);
+  }
 
-    $extensions = $this->extension_repository->findAll();
-
-    /** @var Extension $extension */
-    foreach ($extensions as $extension) {
-      if (in_array($extension->getPrefix(), $prefixes, true)) {
+  public function addEmbroideryExtensions(Program $program, string $code_xml): void
+  {
+    if ($this->isAnEmbroideryProject($code_xml)) {
+      $extension = $this->getExtension(Extension::EMBROIDERY);
+      if (!is_null($extension)) {
         $program->addExtension($extension);
-
-        if ('PHIRO' == $extension->getPrefix()) {
-          $program->setFlavor('phirocode');
-        }
-      }
-
-      if (0 == strcmp($extension->getPrefix(), 'CHROMECAST')) {
-        $is_cast = $xml->xpath('header/isCastProject');
-
-        if (!empty($is_cast)) {
-          $cast_value = ((array) $is_cast[0]);
-          if (0 == strcmp($cast_value[0], 'true')) {
-            $program->addExtension($extension);
-          }
-        }
       }
     }
+  }
+
+  public function addMindstormsExtensions(Program $program, string $code_xml): void
+  {
+    if ($this->isAnEmbroideryProject($code_xml)) {
+      $extension = $this->getExtension(Extension::MINDSTORMS);
+      if (!is_null($extension)) {
+        $program->addExtension($extension);
+      }
+    }
+  }
+
+  public function addPhiroExtensions(Program $program, string $code_xml): void
+  {
+    if ($this->isAPhiroProject($code_xml)) {
+      $extension = $this->getExtension(Extension::PHIRO);
+      if (!is_null($extension)) {
+        $program->addExtension($extension);
+      }
+    }
+  }
+
+  protected function isAnEmbroideryProject(string $code_xml): bool
+  {
+    return false !== strpos($code_xml, '<brick type="StitchBrick">');
+  }
+
+  protected function isAMindstormsProject(string $code_xml): bool
+  {
+    return 1 === preg_match('@ToDo: mindstorms regex for bricks@', $code_xml, $matches);
+  }
+
+  protected function isAPhiroProject(string $code_xml): bool
+  {
+    return false !== strpos($code_xml, '<brick type="Phiro');
+  }
+
+  /**
+   * @throws Exception
+   */
+  protected function getExtension(string $internal_title): ?Extension
+  {
+    /** @var Extension|null $extension */
+    $extension = $this->extension_repository->findOneBy(['internal_title' => $internal_title]);
+    if (null === $extension) {
+      $this->logger->alert("Extension `{$internal_title}` is missing!");
+    }
+
+    return $extension;
   }
 }
